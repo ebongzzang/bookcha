@@ -40,9 +40,6 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-undertow")
 	implementation("org.mapstruct:mapstruct:1.3.0.Final")
 
-	implementation("org.springframework.boot:spring-boot-starter-webflux") {
-		exclude("org.springframework.boot","spring-boot-starter-tomcat")
-	}
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 	implementation("org.flywaydb:flyway-core")
@@ -60,6 +57,14 @@ dependencies {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
 	testImplementation("io.projectreactor:reactor-test")
+
+	implementation("io.springfox:springfox-swagger2:2.9.2") {
+		exclude("org.mapstruct","mapstruct")
+	}
+	implementation("io.springfox:springfox-swagger-ui:2.9.2") {
+		exclude("org.mapstruct","mapstruct")
+	}
+
 	kapt("org.mapstruct:mapstruct-processor:1.3.0.Final")
 	kapt("org.springframework.boot:spring-boot-configuration-processor")
 
