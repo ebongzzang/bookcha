@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: dev
+
+---
+spring:
+  profiles: dev
+  application:
+    name: bookcha
+  datasource:
+    url:
+
+  flyway:
+    enabled: false
+  cloud:
+    discovery:
+      enabled: false
