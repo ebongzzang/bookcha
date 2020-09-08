@@ -5,12 +5,12 @@ plugins {
 	id("java-library")
 	id("org.springframework.boot") version "2.3.3.RELEASE"
 	id("io.spring.dependency-management") version "1.0.10.RELEASE"
+	id("com.google.cloud.tools.jib") version "2.5.0"
 	kotlin("jvm") version "1.3.72"
 	kotlin("plugin.spring") version "1.3.72"
 	kotlin("plugin.jpa") version "1.3.72"
 	kotlin("kapt") version "1.4.0"
 	kotlin("plugin.noarg") version "1.3.72"
-
 }
 
 group = "org.ebong2"
@@ -48,6 +48,8 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 	implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+	implementation("org.springframework.cloud:spring-cloud-starter-kubernetes")
+
 	compileOnly("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
@@ -89,4 +91,8 @@ tasks.withType<KotlinCompile> {
 
 noArg {
 	annotations("javax.persistence.Entity","org.mapstruct.Mapper")
+}
+
+jib {
+
 }
