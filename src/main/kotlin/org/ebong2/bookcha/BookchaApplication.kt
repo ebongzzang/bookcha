@@ -15,12 +15,13 @@ import org.springframework.web.client.RestTemplate
 @EnableFeignClients
 @EnableDiscoveryClient
 class BookchaApplication {
-	fun main(args: Array<String>) {
-		runApplication<BookchaApplication>(*args)
-	}
-
 	@Bean
 	fun restTemplate(builder: RestTemplateBuilder): RestTemplate? {
 		return builder.build()
 	}
+
+}
+
+fun main(args: Array<String>) {
+	runApplication<BookchaApplication>(*args)
 }

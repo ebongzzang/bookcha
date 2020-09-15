@@ -3,9 +3,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("idea")
 	id("java-library")
+	id("java")
 	id("org.springframework.boot") version "2.3.3.RELEASE"
 	id("io.spring.dependency-management") version "1.0.10.RELEASE"
 	id("com.google.cloud.tools.jib") version "2.5.0"
+	id("com.github.johnrengelman.shadow") version "6.0.0"
 	kotlin("jvm") version "1.3.72"
 	kotlin("plugin.spring") version "1.3.72"
 	kotlin("plugin.jpa") version "1.3.72"
@@ -87,12 +89,33 @@ tasks.withType<KotlinCompile> {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
 		jvmTarget = "11"
 	}
+
+}
+
+tasks.jar {
+	manifest {
+		attributes["Main-Class"] = "org.ebong2.bookcha.BookchaApplicationKt"
+	}
 }
 
 noArg {
 	annotations("javax.persistence.Entity","org.mapstruct.Mapper")
 }
 
+
 jib {
+	to {
+		image = "${System.getenv("DOCKER_REPO")}/bookcha"
+		tags = setOf("$version")
+		auth {
+			username = System.getenv("DOCKER_USERNAME")
+			password = System.getenv("DOCKER_PASSWORD")
+		}
+	}
+
+	from {
+		image = "openjdk:11.0.8-slim-buster"
+	}
+
 
 }
